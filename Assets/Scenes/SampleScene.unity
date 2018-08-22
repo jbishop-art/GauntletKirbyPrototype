@@ -499,6 +499,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player01: {fileID: 381796867}
-  cameraOffsetX: -25
-  cameraOffsetZ: -25
-  cameraOffsetY: 26
+  cameraOffsetDepth: -25
+  cameraOffsetHeight: 26

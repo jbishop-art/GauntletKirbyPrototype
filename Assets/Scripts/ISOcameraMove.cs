@@ -7,9 +7,8 @@ public class ISOcameraMove : MonoBehaviour
 	public GameObject Player01;
 	float playerX;
 	float playerZ;
-	public float cameraOffsetX;
-	public float cameraOffsetZ;
-	public float cameraOffsetY;
+	public float cameraOffsetDepth;
+	public float cameraOffsetHeight;
 
 
 
@@ -27,7 +26,7 @@ public class ISOcameraMove : MonoBehaviour
 		playerZ = Player01.transform.position.z;
 
 
-		transform.position = new Vector3((playerX + cameraOffsetX), cameraOffsetY, (playerZ + cameraOffsetZ));
+		transform.position = new Vector3((playerX + cameraOffsetDepth), cameraOffsetHeight, (playerZ + cameraOffsetDepth));
 
 	}
 }

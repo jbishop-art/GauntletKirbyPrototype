@@ -15,17 +15,16 @@ public class Player01Controller : MonoBehaviour
 		forward = Vector3.Normalize(forward);
 
 		right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
-
-	
-
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
 		//Detect Input.
-		if (Input.anyKey)
-			Move();
+		//if (Input.anyKey)
+		//	Move();
+
+		Move();
 	}
 
 	//Drives direction of object based on key input.
