@@ -150,8 +150,8 @@ InputManager:
     axis: 2
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Left Thumb Horizontal
-    descriptiveName: Left Thumb Horizontal
+    m_Name: P1 Left Thumb Horizontal
+    descriptiveName: P1 Left Thumb Horizontal
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
@@ -164,10 +164,26 @@ InputManager:
     invert: 0
     type: 2
     axis: 0
-    joyNum: 0
+    joyNum: 1
   - serializedVersion: 3
-    m_Name: Left Thumb Vertical
-    descriptiveName: Left Thumb Vertical
+    m_Name: P2 Left Thumb Horizontal
+    descriptiveName: P2 Left Thumb Horizontal
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 3
+    dead: 0.1
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 0
+    joyNum: 2
+  - serializedVersion: 3
+    m_Name: P1 Left Thumb Vertical
+    descriptiveName: P1 Left Thumb Vertical
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
@@ -180,7 +196,23 @@ InputManager:
     invert: 1
     type: 2
     axis: 1
-    joyNum: 0
+    joyNum: 1
+  - serializedVersion: 3
+    m_Name: P2 Left Thumb Vertical
+    descriptiveName: P2 Left Thumb Vertical
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: 0.19
+    sensitivity: 1
+    snap: 0
+    invert: 1
+    type: 2
+    axis: 1
+    joyNum: 2
   - serializedVersion: 3
     m_Name: Fire1
     descriptiveName: 
