@@ -17,12 +17,16 @@ public class PlayerController : MonoBehaviour
     public Transform player01T;
     public Transform player02T;
     Vector3 p1StoredPos;
+    float p1StoredPosx;
+    float p1StoredPosz;
+    float p1StoredPozy;
     
 
 
     // Use this for initialization
     void Start()
     {
+
         //Establishes forward direction of the camera to have consistant movment based on the character.  Because the camera is at a downward angle and we want the camera to be fixed at this angle and perspective, we need to always have transforms adjust to keep this same angle.
         p1forward = Camera.main.transform.forward;
         p1forward.y = 0;
@@ -42,15 +46,17 @@ public class PlayerController : MonoBehaviour
     {
         //Determines distance between Player01 & Player02.
         distance = Vector3.Distance(player01T.position, player02T.position);
-        Debug.Log(distance);
 
-        /*
+        //Moves P2 to P1 when distance is >= 55 units.
         if (distance >= 55)
         {
-            p1StoredPos = Player01T.transform.position;
-            Player02T.transform.position = p1StoredPos;
+            p1StoredPosx = Player01T.transform.position.x;
+            p1StoredPosz = Player01T.transform.position.z;
+            p1StoredPozy = Player01T.transform.position.y;
+
+            Player02T.transform.position = new Vector3((p1StoredPosx + 1), p1StoredPozy, (p1StoredPosz - 1));
+
         }
-        */
     
 
         //Dictates if Player01 moves.
@@ -133,4 +139,6 @@ public class PlayerController : MonoBehaviour
             transform.position += p2upMovement;
         }
     }
+
+
 }

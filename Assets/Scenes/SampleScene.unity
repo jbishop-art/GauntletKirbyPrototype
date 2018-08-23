@@ -634,3 +634,4 @@ MonoBehaviour:
   player02T: {fileID: 23108993}
   cameraOffsetDepth: -25
   cameraOffsetHeight: 26
+  transitionDuration: 1
