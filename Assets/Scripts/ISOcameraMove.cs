@@ -6,8 +6,6 @@ public class ISOcameraMove : MonoBehaviour
 {
 	public GameObject Player01;
     public GameObject Player02;
-    public Rigidbody rbPlayer01;
-    public Rigidbody rbPlayer02;
     float distance;
     float distancePrevious;
     public Transform player01T;
@@ -18,21 +16,17 @@ public class ISOcameraMove : MonoBehaviour
     float player02Z;
 	public float cameraOffsetDepth;
 	public float cameraOffsetHeight;
-    float player01V;
-    float player02V;
-
-    
-    
-    public float offsetNumD;
-    public float offsetNumH;
+    float cameraAdjust;
+   
 
 
-
+    float xPos;
+    float zPos;
 
 	// Use this for initialization
 	void Start () 
 	{
-		distancePrevious = Vector3.Distance(player01T.position, player02T.position);
+		//distancePrevious = Vector3.Distance(player01T.position, player02T.position);
         cameraOffsetDepth = -25;
         cameraOffsetHeight = 26;
 
@@ -50,52 +44,24 @@ public class ISOcameraMove : MonoBehaviour
         player02Z = Player02.transform.position.z;
 
         //Determines distance between Player01 & Player02.
-        distance = Vector3.Distance(player01T.position, player02T.position);
+        distance = Vector3.Distance(player01T.position, player02T.position);   
 
-        /*
-        player01V = (rbPlayer01.velocity.magnitude * 1000000);
-        player02V = (rbPlayer02.velocity.magnitude * 1000000);
-        Debug.Log("P1 Vel: " + player01V);
-        Debug.Log("P2 Vel: " + player02V);
-        */
-        
-                
-
-        if (distancePrevious > distance)
-        {
-            //cameraOffsetDepth = (cameraOffsetDepth + offsetNumD);
-            cameraOffsetHeight = (cameraOffsetHeight - offsetNumH);
-
-            distancePrevious = distance;
-        }
-        else if (distancePrevious < distance)
-        {
-            //cameraOffsetDepth = (cameraOffsetDepth - offsetNumD);
-            cameraOffsetHeight = (cameraOffsetHeight + offsetNumH);
-
-            distancePrevious = distance;
-        }
-        else 
-        {
-            distancePrevious = distance;
-        }
-
-
-        /////////////    NEEDS WORK!!!  use the && to clarify boundries for camera.   /////////////
         //Positions camera to always keep player/players centered in the camera view.
-        if (player01X > player02X)
-        {
-            transform.position = new Vector3(((player01X - player02X) + cameraOffsetDepth), cameraOffsetHeight, ((player01Z - player02Z) + cameraOffsetDepth));
-        }
-        else if (player01X < player02X)
-        {
-            transform.position = new Vector3(((player01X + player02X) + cameraOffsetDepth), cameraOffsetHeight, ((player01Z + player02Z) + cameraOffsetDepth));
-        }
-        else
-        {
+        //transform.position = new Vector3((player01X + cameraOffsetDepth), cameraOffsetHeight, (player01Z + cameraOffsetDepth));
 
+        if ((distance > 35) && (cameraOffsetDepth > (-35)))
+        {
+            cameraOffsetDepth = cameraOffsetDepth - 0.1f;
+        }
+        else if ((distance <= 35) && (cameraOffsetDepth <= (-25)))
+        {
+            cameraOffsetDepth = cameraOffsetDepth + 0.1f;
         }
         
+        transform.position = new Vector3((((player01X + player02X) / 2) + cameraOffsetDepth), cameraOffsetHeight, ((player01Z + player02Z) / 2) + cameraOffsetDepth);
+
+
+
 
     }
 }

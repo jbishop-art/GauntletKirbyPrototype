@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameObject Player01T;
+    public GameObject Player02T;
     public bool Player01;
     public bool Player02;
     public float p1moveSpeed;
@@ -11,6 +13,11 @@ public class PlayerController : MonoBehaviour
     Vector3 p1forward, p1right;
     Vector3 p2forward, p2right;
     public bool controlSwitch;
+    float distance;
+    public Transform player01T;
+    public Transform player02T;
+    Vector3 p1StoredPos;
+    
 
 
     // Use this for initialization
@@ -33,6 +40,19 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Determines distance between Player01 & Player02.
+        distance = Vector3.Distance(player01T.position, player02T.position);
+        Debug.Log(distance);
+
+        /*
+        if (distance >= 55)
+        {
+            p1StoredPos = Player01T.transform.position;
+            Player02T.transform.position = p1StoredPos;
+        }
+        */
+    
+
         //Dictates if Player01 moves.
         if (Player01 == true)
         {
@@ -54,7 +74,6 @@ public class PlayerController : MonoBehaviour
         {
 
         }
-
 
 
     }
