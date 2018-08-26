@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/rikkiScene.unity
-=======
-- path: Assets/Scenes/Blockout.unity
->>>>>>> Darren's-Branch
+- path: Assets/Scenes/SampleScene.unity
   isLoaded: 1
   isActive: 1
