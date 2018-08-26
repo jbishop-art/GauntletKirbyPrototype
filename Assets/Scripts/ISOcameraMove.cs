@@ -14,17 +14,17 @@ public class ISOcameraMove : MonoBehaviour
 	float player01Z;
     float player02X;
     float player02Z;
-    float player02Y;
 	public float cameraOffsetDepth;
 	public float cameraOffsetHeight;
-    float cameraAdjust;
-
-    public float transitionDuration = 1.0f;
-    Vector3 startMark;
+    
     Vector3 endMark;
+    Vector3 center;
+    public float transitionDuration = 1.0f;
 
-    bool cameraTrigger;
+    public bool cameraTrigger;
+    public float triggerWaitTime = 1.0f;
 
+    public float maxRange = 55.0f;
 
 	// Use this for initialization
 	void Start () 
@@ -34,7 +34,6 @@ public class ISOcameraMove : MonoBehaviour
         cameraOffsetHeight = 26;
 
         cameraTrigger = false;
-
     }
 	
 	// Update is called once per frame
@@ -47,7 +46,6 @@ public class ISOcameraMove : MonoBehaviour
         //Finds Player02's position for x & y.
         player02X = Player02.transform.position.x;
         player02Z = Player02.transform.position.z;
-        player02Y = Player02.transform.position.y;
 
         //Determines distance between Player01 & Player02.
         distance = Vector3.Distance(player01T.position, player02T.position);
@@ -63,25 +61,46 @@ public class ISOcameraMove : MonoBehaviour
             cameraOffsetDepth = cameraOffsetDepth + 0.1f;
         }
 
-        if (distance >= 55)
+        //
+        //if Player02 moves to far away from Player01, teleport Player02 to Player01 with SMOOTH camera transition.
+        //
+        if (distance >= 55) 
         {
-            startMark = new Vector3(player02X, player02Y, player02Z);
-            endMark = new Vector3((((player01X + player02X) / 2) + cameraOffsetDepth), cameraOffsetHeight, ((player01Z + player02Z) / 2) + cameraOffsetDepth);
-            transform.position = Vector3.Lerp(startMark, endMark, 1);
-            //Use bool switch.
-        }
-        else
-        {
-            transform.position = new Vector3((((player01X + player02X) / 2) + cameraOffsetDepth), cameraOffsetHeight, ((player01Z + player02Z) / 2) + cameraOffsetDepth);
+            cameraTrigger = true;
 
+            StartCoroutine(WaitTrigger()); 
         }
 
-
-
-        //transform.position = new Vector3((((player01X + player02X) / 2) + cameraOffsetDepth), cameraOffsetHeight, ((player01Z + player02Z) / 2) + cameraOffsetDepth);
-
-        //transform.position = Vector3.Lerp(new Vector3(player02X, player02Y, player02Z), new Vector3((((player01X + player02X) / 2) + cameraOffsetDepth), cameraOffsetHeight, ((player01Z + player02Z) / 2) + cameraOffsetDepth), 1);
+        CameraTransition();
 
     }
 
+    IEnumerator WaitTrigger()
+    {
+        yield return new WaitForSeconds(triggerWaitTime);
+        cameraTrigger = false;
+    }
+
+    void CameraTransition()
+    {        
+        if (cameraTrigger == true)
+        {
+            endMark = new Vector3((((player01X + player02X) / 2) + cameraOffsetDepth), cameraOffsetHeight, ((player01Z + player02Z) / 2) + cameraOffsetDepth);
+            transform.position = Vector3.Lerp(transform.position, endMark, Time.deltaTime * transitionDuration);
+            Debug.Log("TEST TEST TEST");
+        }
+        else if (cameraTrigger == false)
+        {
+            //transform.position = new Vector3((((player01X + player02X) / 2) + cameraOffsetDepth), cameraOffsetHeight, ((player01Z + player02Z) / 2) + cameraOffsetDepth);
+            center = new Vector3((((player01X + player02X) / 2) + cameraOffsetDepth), cameraOffsetHeight, ((player01Z + player02Z) / 2) + cameraOffsetDepth);
+            transform.position = Vector3.Lerp(transform.position, center, Time.deltaTime * transitionDuration);
+        }
+        else
+        {
+
+        }
+
+
+    }
+    
 }

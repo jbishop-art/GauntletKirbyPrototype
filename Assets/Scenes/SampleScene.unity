@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -470,7 +470,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 7260e7030ee98e446b41d0e525703772, type: 2}
+  - {fileID: 2100000, guid: 56d29206be5a25f4c8e01a1f455002b6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -634,4 +634,7 @@ MonoBehaviour:
   player02T: {fileID: 23108993}
   cameraOffsetDepth: -25
   cameraOffsetHeight: 26
-  transitionDuration: 1
+  transitionDuration: 2
+  cameraTrigger: 0
+  triggerWaitTime: 2
+  maxRange: 65
