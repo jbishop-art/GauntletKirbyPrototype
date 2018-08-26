@@ -64,7 +64,7 @@ public class ISOcameraMove : MonoBehaviour
         //
         //if Player02 moves to far away from Player01, teleport Player02 to Player01 with SMOOTH camera transition.
         //
-        if (distance >= 55) 
+        if (distance >= maxRange) 
         {
             cameraTrigger = true;
 
@@ -75,12 +75,14 @@ public class ISOcameraMove : MonoBehaviour
 
     }
 
+    //Waits triggerWaitTime amount until it turns off the cameraTrigger.
     IEnumerator WaitTrigger()
     {
         yield return new WaitForSeconds(triggerWaitTime);
         cameraTrigger = false;
     }
 
+    //Handles camera movement and transitions for teleports.
     void CameraTransition()
     {        
         if (cameraTrigger == true)
