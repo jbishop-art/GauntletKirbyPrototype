@@ -87,9 +87,9 @@ public class ISOcameraMove : MonoBehaviour
     {        
         if (cameraTrigger == true)
         {
+            //Sets endMark as center of player01 & player02 after player02 teleport.  Then lerps the camera form player02 old location to endMark.
             endMark = new Vector3((((player01X + player02X) / 2) + cameraOffsetDepth), cameraOffsetHeight, ((player01Z + player02Z) / 2) + cameraOffsetDepth);
             transform.position = Vector3.Lerp(transform.position, endMark, Time.deltaTime * transitionDuration);
-            Debug.Log("TEST TEST TEST");
         }
         else if (cameraTrigger == false)
         {
@@ -101,7 +101,6 @@ public class ISOcameraMove : MonoBehaviour
         {
 
         }
-
 
     }
     
