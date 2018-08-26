@@ -61,12 +61,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="Assets\Scripts\Chara_FacingCamera.cs" />
+    <Compile Include="Assets\Scripts\EnemyController.cs" />
     <Compile Include="Assets\Scripts\Facing_Direction.cs" />
-=======
-    <Compile Include="Assets\EnemyController.cs" />
->>>>>>> Trevor
     <Compile Include="Assets\Scripts\ISOcameraMove.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Weapon\ColliderListener.cs" />
