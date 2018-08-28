@@ -13,14 +13,16 @@ public class Weapon : MonoBehaviour
     public float cooldown = 0;
     public float currentCooldown = 0; // Once this is equal to cooldown we can attack again.
 
+    public bool canAttack = true;
+
     //For AI
+    [Header("AI Attributes")]
     public float attackDistance; // For AI this is how close they need to be to attack with their given weapon/ability
 
     public float chargeTime; // Upon initiating an attack, how long before the attack actually executes.  AI only.
     public float currentChargeTime;
     public bool charged = true;
 
-    public bool canAttack = true;
 
 	// Use this for initialization
 	void Start ()

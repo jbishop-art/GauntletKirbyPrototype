@@ -11,6 +11,22 @@ Prefab:
   m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1568411610222296}
   m_IsPrefabAsset: 1
+--- !u!1 &1062543237372580
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4029269304728686}
+  - component: {fileID: 135866720988559178}
+  m_Layer: 10
+  m_Name: Detection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1301125246238680
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,6 +115,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4029269304728686
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1062543237372580}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4318482983926500}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4225859979116974
 Transform:
   m_ObjectHideFlags: 1
@@ -139,6 +168,7 @@ Transform:
   m_Children:
   - {fileID: 4225859979116974}
   - {fileID: 4987090942980848}
+  - {fileID: 4029269304728686}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -360,7 +390,7 @@ MonoBehaviour:
   damage: 5
   cooldown: 0.1
   currentCooldown: 0
-  attackDistance: 20
+  attackDistance: 25
   chargeTime: 1.5
   currentChargeTime: 0
   charged: 1
@@ -379,18 +409,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  engaging: 0
-  engagedPlayer: {fileID: 0}
-  engagedPlayers: []
   ourWeapon: {fileID: 114413107112241272}
   moveSpeed: 10
-  distance: 0
 --- !u!135 &135053568577555812
 SphereCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1568411610222296}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 10.08
+  m_Center: {x: 0, y: 0.000000029802322, z: 0}
+--- !u!135 &135866720988559178
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1062543237372580}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1

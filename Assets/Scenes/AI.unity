@@ -144,6 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51e3633e52aaf044fbc7154ac11e61e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerNum: 2
+  health: 100
   Player01T: {fileID: 381796867}
   Player02T: {fileID: 23108987}
   Player01: 0
@@ -153,6 +155,7 @@ MonoBehaviour:
   controlSwitch: 1
   player01T: {fileID: 381796871}
   player02T: {fileID: 23108993}
+  theWeapon: {fileID: 390424571}
 --- !u!54 &23108989
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -335,12 +338,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  engaging: 0
-  engagedPlayer: {fileID: 0}
-  engagedPlayers: []
   ourWeapon: {fileID: 0}
   moveSpeed: 5
-  distance: 0
 --- !u!54 &245452729
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -550,12 +549,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  engaging: 0
-  engagedPlayer: {fileID: 0}
-  engagedPlayers: []
   ourWeapon: {fileID: 0}
   moveSpeed: 5
-  distance: 0
 --- !u!54 &287522934
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -638,6 +633,12 @@ Transform:
   m_Father: {fileID: 936834647}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: -67.345, z: 0}
+--- !u!114 &296230008 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114466838106982284, guid: 9de01a6e80fe21247b4216243721bc2d,
+    type: 2}
+  m_PrefabInternal: {fileID: 775838273}
+  m_Script: {fileID: 11500000, guid: 7ae39760706924a4186abdded475585e, type: 3}
 --- !u!1001 &341707334
 Prefab:
   m_ObjectHideFlags: 0
@@ -808,6 +809,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51e3633e52aaf044fbc7154ac11e61e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerNum: 1
+  health: 100
   Player01T: {fileID: 381796867}
   Player02T: {fileID: 23108987}
   Player01: 1
@@ -817,6 +820,7 @@ MonoBehaviour:
   controlSwitch: 1
   player01T: {fileID: 381796871}
   player02T: {fileID: 23108993}
+  theWeapon: {fileID: 296230008}
 --- !u!54 &381796873
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -832,6 +836,12 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &390424571 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114303873332125320, guid: fb057ca0885cdda44b400227c69148c6,
+    type: 2}
+  m_PrefabInternal: {fileID: 252224647}
+  m_Script: {fileID: 11500000, guid: a632fe30b9ed1364689f9ec345548822, type: 3}
 --- !u!1 &457871812
 GameObject:
   m_ObjectHideFlags: 0
@@ -864,12 +874,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  engaging: 0
-  engagedPlayer: {fileID: 0}
-  engagedPlayers: []
   ourWeapon: {fileID: 0}
   moveSpeed: 5
-  distance: 0
 --- !u!54 &457871814
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1117,12 +1123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  engaging: 0
-  engagedPlayer: {fileID: 0}
-  engagedPlayers: []
   ourWeapon: {fileID: 0}
   moveSpeed: 5
-  distance: 0
 --- !u!54 &636545564
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1237,12 +1239,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  engaging: 0
-  engagedPlayer: {fileID: 0}
-  engagedPlayers: []
   ourWeapon: {fileID: 0}
   moveSpeed: 5
-  distance: 0
 --- !u!54 &728034004
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1357,12 +1355,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  engaging: 0
-  engagedPlayer: {fileID: 0}
-  engagedPlayers: []
   ourWeapon: {fileID: 0}
   moveSpeed: 5
-  distance: 0
 --- !u!54 &738976344
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1519,12 +1513,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  engaging: 0
-  engagedPlayer: {fileID: 0}
-  engagedPlayers: []
   ourWeapon: {fileID: 0}
   moveSpeed: 5
-  distance: 0
 --- !u!54 &911080044
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1693,12 +1683,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  engaging: 0
-  engagedPlayer: {fileID: 0}
-  engagedPlayers: []
   ourWeapon: {fileID: 0}
   moveSpeed: 5
-  distance: 0
 --- !u!54 &1206697091
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1813,12 +1799,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  engaging: 0
-  engagedPlayer: {fileID: 0}
-  engagedPlayers: []
   ourWeapon: {fileID: 0}
   moveSpeed: 5
-  distance: 0
 --- !u!54 &1331093287
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1933,12 +1915,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  engaging: 0
-  engagedPlayer: {fileID: 0}
-  engagedPlayers: []
   ourWeapon: {fileID: 0}
   moveSpeed: 5
-  distance: 0
 --- !u!54 &1388485335
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2130,12 +2108,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  engaging: 0
-  engagedPlayer: {fileID: 0}
-  engagedPlayers: []
   ourWeapon: {fileID: 0}
   moveSpeed: 5
-  distance: 0
 --- !u!54 &1452977103
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2250,12 +2224,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  engaging: 0
-  engagedPlayer: {fileID: 0}
-  engagedPlayers: []
   ourWeapon: {fileID: 0}
   moveSpeed: 5
-  distance: 0
 --- !u!54 &1528603421
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2375,12 +2345,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  engaging: 0
-  engagedPlayer: {fileID: 0}
-  engagedPlayers: []
   ourWeapon: {fileID: 0}
   moveSpeed: 5
-  distance: 0
 --- !u!54 &1570284620
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2495,12 +2461,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  engaging: 0
-  engagedPlayer: {fileID: 0}
-  engagedPlayers: []
   ourWeapon: {fileID: 0}
   moveSpeed: 5
-  distance: 0
 --- !u!54 &1591716089
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2673,12 +2635,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114319537248965606, guid: 7f620a45badaccd4ab03196459cf045e,
-        type: 2}
-      propertyPath: moveSpeed
-      value: 10
+    - target: {fileID: 1988355889765290, guid: 7f620a45badaccd4ab03196459cf045e, type: 2}
+      propertyPath: m_Name
+      value: BasicMeleeEnemy
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1600202290900022, guid: 7f620a45badaccd4ab03196459cf045e, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 135453748546245896, guid: 7f620a45badaccd4ab03196459cf045e, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 7f620a45badaccd4ab03196459cf045e, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &1980523335
@@ -2713,12 +2679,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  engaging: 0
-  engagedPlayer: {fileID: 0}
-  engagedPlayers: []
   ourWeapon: {fileID: 0}
   moveSpeed: 5
-  distance: 0
 --- !u!54 &1980523337
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2840,7 +2802,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1568411610222296, guid: db0fa27e630c7564797bf37b1899d781, type: 2}
+      propertyPath: m_Name
+      value: BasicRangedEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1062543237372580, guid: db0fa27e630c7564797bf37b1899d781, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 135053568577555812, guid: db0fa27e630c7564797bf37b1899d781, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: db0fa27e630c7564797bf37b1899d781, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &2092323844
@@ -2875,12 +2846,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  engaging: 0
-  engagedPlayer: {fileID: 0}
-  engagedPlayers: []
   ourWeapon: {fileID: 0}
   moveSpeed: 5
-  distance: 0
 --- !u!54 &2092323846
 Rigidbody:
   m_ObjectHideFlags: 0

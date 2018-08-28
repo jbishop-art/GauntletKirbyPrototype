@@ -6,20 +6,22 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public float health = 10;
-    public bool engaging = false;
+    private bool engaging = false;
 
-    public GameObject engagedPlayer;
+    private GameObject engagedPlayer;
 
-    public List<GameObject> engagedPlayers;
+    private List<GameObject> engagedPlayers;
 
     public Weapon ourWeapon;
     private float maxDistanceDelta;
     public float moveSpeed = 10;
-    public float distance;
+    private float distance;
 
     // Use this for initialization
     void Start ()
     {
+        engagedPlayers = new List<GameObject>();
+
         maxDistanceDelta = moveSpeed / 50;
         //Physics.IgnoreLayerCollision(10, 10);	
 	}
