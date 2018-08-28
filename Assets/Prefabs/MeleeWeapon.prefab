@@ -52,7 +52,7 @@ GameObject:
   - component: {fileID: 4167945935325898}
   - component: {fileID: 114303873332125320}
   m_Layer: 0
-  m_Name: BasicMeleeWeapon
+  m_Name: MeleeWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
