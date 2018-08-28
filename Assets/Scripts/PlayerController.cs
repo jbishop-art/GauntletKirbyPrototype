@@ -6,9 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public int playerNum;
     private string attackBtn;
-    private bool atkWait = false;
     private string abilityBtn;
-    private bool abilityWait = false;
     private string stealAbilityBtn;
     public float health = 100;
 
@@ -29,19 +27,23 @@ public class PlayerController : MonoBehaviour
     float p1StoredPosz;
     float p1StoredPozy;
 
+    bool col = false;
     bool Ability01 = false;
     bool Ability02 = false;
 
     public Weapon theWeapon;
+    public GameObject ability;
+    GameObject colAbility;
+     
 
 
     // Use this for initialization
     void Start()
     {
-        string player = "P" + playerNum;
-        attackBtn = player + " Attack Button";
-        abilityBtn = player + " Use Ability";
-        stealAbilityBtn = player + " Steal Ability";
+        string playerN  = "P" + playerNum;
+        attackBtn = playerN + " Attack Button";
+        abilityBtn = playerN + " Use Ability";
+        stealAbilityBtn = playerN + " Steal Ability";
         
 
         //Establishes forward direction of the camera to have consistant movment based on the character.  Because the camera is at a downward angle and we want the camera to be fixed at this angle and perspective, we need to always have transforms adjust to keep this same angle.
@@ -98,11 +100,13 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        //Detects Players attack
+        //Detects Players attack & actions attack.
         Attack();
 
+        //Detects Players steal & actions steal.
         StealAbility();
 
+        //Detects Players ability & actions ability.
         UseAbility();
     }
 
@@ -164,42 +168,29 @@ public class PlayerController : MonoBehaviour
 
     void Attack()
     {
-        if ((atkWait == false) && (Input.GetAxisRaw(attackBtn) < -0.1f))
+        if (Input.GetAxisRaw(attackBtn) < -0.1f)
         {
-            abilityWait = true;
             theWeapon.Attack();
-            StartCoroutine(AtkWait());
         }
         
     }
 
-    IEnumerator AtkWait()
-    {
-        yield return new WaitForSeconds(2.0f);
-        atkWait = false;
-    }
 
     void UseAbility()
     {
-        if ((abilityWait == false ) && (Input.GetAxisRaw(abilityBtn) > 0.1f))
+        if (Input.GetAxisRaw(abilityBtn) > 0.1f)
         {
-            abilityWait = true;
             Debug.Log("USE Ability!");
-            StartCoroutine(AbilityWait());
         }
     }
 
-    IEnumerator AbilityWait()
-    {
-        yield return new WaitForSeconds(2.0f);
-        abilityWait = false;
-    }
 
     void StealAbility()
     {
-        if (Input.GetButtonDown(stealAbilityBtn) == true)
+        if ((Input.GetButtonDown(stealAbilityBtn) == true) && (col == true))
         {
-            Debug.Log("STEAL Ability!");
+            ability = Instantiate(colAbility, transform.position, Quaternion.identity);
+            ability.transform.parent = gameObject.transform;
         }
         
     }
@@ -222,6 +213,20 @@ public class PlayerController : MonoBehaviour
         foreach(Renderer r in renders)
         {
             r.enabled = false;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+         if (collision.gameObject.tag == "Enemy")
+        {
+            col = true;
+            colAbility = collision.gameObject.GetComponent<EnemyController>().ability;
+            Debug.Log(colAbility);
+        }
+        else
+        {
+            col = false;
         }
     }
 }
