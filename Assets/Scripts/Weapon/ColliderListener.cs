@@ -9,6 +9,7 @@ public class ColliderListener : MonoBehaviour
     private void Awake()
     {
         GetComponentInParent<MeleeWeapon>();
+
     }
 
     public void OnCollisionEnter(Collision collision)
