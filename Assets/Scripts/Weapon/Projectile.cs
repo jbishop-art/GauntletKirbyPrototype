@@ -68,7 +68,7 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && !shotByPlayer)
         {
             Debug.Log("Hit Player");
-            //collider.gameObject.gameObject.GetComponent<PlayerController>().ApplyDamage();
+            collision.gameObject.GetComponent<PlayerController>().ApplyDamage(damage);
 
             //Kill();
         }

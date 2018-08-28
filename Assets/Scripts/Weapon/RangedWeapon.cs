@@ -41,7 +41,6 @@ public class RangedWeapon : Weapon
     private void Shoot()
     {
         GameObject newProjectile = Instantiate(projectile, locator.position, locator.rotation, null);
-        //GameObject newProjectile = Instantiate(projectile, gameObject.transform, true);
         newProjectile.GetComponent<Projectile>().Fire(damage);
     }
 }

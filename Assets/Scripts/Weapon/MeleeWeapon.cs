@@ -170,7 +170,7 @@ public class MeleeWeapon : Weapon
         }
         else if (!base.belongsToPlayer && other.gameObject.CompareTag("Player"))
         {
-            //other.GetComponent<PlayerController>().ApplyDamage(damage);
+            other.gameObject.GetComponent<PlayerController>().ApplyDamage(damage);
         }
     }
 
@@ -184,7 +184,7 @@ public class MeleeWeapon : Weapon
         }
         else if (!base.belongsToPlayer && other.CompareTag("Player"))
         {
-            //other.GetComponent<PlayerController>().ApplyDamage(damage);
+            other.GetComponent<PlayerController>().ApplyDamage(damage);
         }
     }
 }

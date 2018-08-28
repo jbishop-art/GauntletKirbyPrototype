@@ -144,15 +144,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51e3633e52aaf044fbc7154ac11e61e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerNum: 2
+  health: 100
   Player01T: {fileID: 381796867}
   Player02T: {fileID: 23108987}
   Player01: 0
   Player02: 1
   p1moveSpeed: 0
-  p2moveSpeed: 10
-  controlSwitch: 1
+  p2moveSpeed: 20
+  controlSwitch: 0
   player01T: {fileID: 381796871}
   player02T: {fileID: 23108993}
+  theWeapon: {fileID: 1611527180}
 --- !u!54 &23108989
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -741,15 +744,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51e3633e52aaf044fbc7154ac11e61e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerNum: 1
+  health: 100
   Player01T: {fileID: 381796867}
   Player02T: {fileID: 23108987}
   Player01: 1
   Player02: 0
-  p1moveSpeed: 10
+  p1moveSpeed: 15
   p2moveSpeed: 0
-  controlSwitch: 1
+  controlSwitch: 0
   player01T: {fileID: 381796871}
   player02T: {fileID: 23108993}
+  theWeapon: {fileID: 1600025076}
 --- !u!54 &381796873
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2789,6 +2795,18 @@ Transform:
   m_Father: {fileID: 936834647}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1600025076 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114466838106982284, guid: 9de01a6e80fe21247b4216243721bc2d,
+    type: 2}
+  m_PrefabInternal: {fileID: 775838273}
+  m_Script: {fileID: 11500000, guid: 7ae39760706924a4186abdded475585e, type: 3}
+--- !u!114 &1611527180 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114303873332125320, guid: fb057ca0885cdda44b400227c69148c6,
+    type: 2}
+  m_PrefabInternal: {fileID: 252224647}
+  m_Script: {fileID: 11500000, guid: a632fe30b9ed1364689f9ec345548822, type: 3}
 --- !u!1 &1629108254
 GameObject:
   m_ObjectHideFlags: 0

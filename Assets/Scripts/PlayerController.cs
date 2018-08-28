@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public int playerNum;
+    private string attackBtn;
+    private bool atkWait = false;
+    private string abilityBtn;
+    private bool abilityWait = false;
+    private string stealAbilityBtn;
+    public float health = 100;
+
     public GameObject Player01T;
     public GameObject Player02T;
     public bool Player01;
@@ -20,12 +28,21 @@ public class PlayerController : MonoBehaviour
     float p1StoredPosx;
     float p1StoredPosz;
     float p1StoredPozy;
-    
+
+    bool Ability01 = false;
+    bool Ability02 = false;
+
+    public Weapon theWeapon;
 
 
     // Use this for initialization
     void Start()
     {
+        string player = "P" + playerNum;
+        attackBtn = player + " Attack Button";
+        abilityBtn = player + " Use Ability";
+        stealAbilityBtn = player + " Steal Ability";
+        
 
         //Establishes forward direction of the camera to have consistant movment based on the character.  Because the camera is at a downward angle and we want the camera to be fixed at this angle and perspective, we need to always have transforms adjust to keep this same angle.
         p1forward = Camera.main.transform.forward;
@@ -81,7 +98,12 @@ public class PlayerController : MonoBehaviour
 
         }
 
+        //Detects Players attack
+        Attack();
 
+        StealAbility();
+
+        UseAbility();
     }
 
     //Drives direction of Player01 based on key input.
@@ -140,5 +162,57 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void Attack()
+    {
+        if ((atkWait == false) && (Input.GetAxisRaw(attackBtn) < -0.1f))
+        {
+            abilityWait = true;
+            theWeapon.Attack();
+            StartCoroutine(AtkWait());
+        }
+        
+    }
 
+    IEnumerator AtkWait()
+    {
+        yield return new WaitForSeconds(2.0f);
+        atkWait = false;
+    }
+
+    void UseAbility()
+    {
+        if ((abilityWait == false ) && (Input.GetAxisRaw(abilityBtn) > 0.1f))
+        {
+            abilityWait = true;
+            Debug.Log("USE Ability!");
+            StartCoroutine(AbilityWait());
+        }
+    }
+
+    IEnumerator AbilityWait()
+    {
+        yield return new WaitForSeconds(2.0f);
+        abilityWait = false;
+    }
+
+    void StealAbility()
+    {
+        if (Input.GetButtonDown(stealAbilityBtn) == true)
+        {
+            Debug.Log("STEAL Ability!");
+        }
+        
+    }
+
+    public void ApplyDamage(float damage)
+    {
+        health = health - damage;
+
+        if (health <= 0) Kill();
+    }
+
+    public void Kill()
+    {
+        Destroy(gameObject);
+    }
 }
