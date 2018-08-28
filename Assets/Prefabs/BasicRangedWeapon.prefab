@@ -42,6 +42,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1599260768756382
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4999272626375262}
+  - component: {fileID: 33307226235629562}
+  - component: {fileID: 23633040812165334}
+  - component: {fileID: 65133961467539488}
+  m_Layer: 10
+  m_Name: Hat
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1826318661794096
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,12 +113,61 @@ Transform:
   m_GameObject: {fileID: 1568492994158664}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0.502, y: 0.229, z: -0.343}
-  m_LocalScale: {x: 0.3333335, y: 0.33333334, z: 0.3333335}
+  m_LocalScale: {x: 0.47386688, y: 0.47386667, z: 0.47386688}
   m_Children:
   - {fileID: 4517317177232632}
+  - {fileID: 4999272626375262}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!4 &4999272626375262
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1599260768756382}
+  m_LocalRotation: {x: 0.65328145, y: 0.65328145, z: -0.27059805, w: 0.27059805}
+  m_LocalPosition: {x: 0.515, y: 0.305, z: 1.086}
+  m_LocalScale: {x: 0.7034327, y: 0.703433, z: 0.7034331}
+  m_Children: []
+  m_Father: {fileID: 4972962682737548}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 45.000004, y: 90, z: 90}
+--- !u!23 &23633040812165334
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1599260768756382}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
+  m_Materials:
+  - {fileID: 2100000, guid: 161e6af06260a5e448f7fdee3b9f7066, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!23 &23906570484547728
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -136,6 +203,13 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!33 &33307226235629562
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1599260768756382}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &33888171660747154
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -143,6 +217,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1826318661794096}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65133961467539488
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1599260768756382}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65673069287463936
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -170,10 +256,12 @@ MonoBehaviour:
   damage: 5
   cooldown: 0.1
   currentCooldown: 0
+  canAttack: 1
   attackDistance: 0
   chargeTime: 0
   currentChargeTime: 0
+  charging: 0
   charged: 1
-  canAttack: 1
+  hasMoved: 0
   locator: {fileID: 4052047793056046}
   projectile: {fileID: 1754424048191788, guid: 842da54609d38f644b53eb8206552506, type: 2}

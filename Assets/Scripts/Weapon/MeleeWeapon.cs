@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class MeleeWeapon : Weapon
 {
+    [Header("Melee Attributes")]
+
     ColliderListener listener;
 
     // These two will probably be replaced.  Our actual game will use sprites and not an actual 3d mesh.
@@ -78,17 +80,13 @@ public class MeleeWeapon : Weapon
 
         if (canAttack == false)
         {
-            // These two lines are messy and should be changed later
-            //if (currentCooldown > (cooldown * 0.01f)) ourCone.enabled = false;
-            //if (currentCooldown > swingSpeed) weaponRenderer.enabled = false;
-
             if (attackRightToLeft)
             {
                 float result = Mathf.Lerp(min, max, currentCooldown / swingSpeed);
 
                 weaponToSwing.transform.localRotation = Quaternion.Euler(weaponToSwing.transform.localRotation.x, result, weaponToSwing.transform.localRotation.z);
 
-                Debug.Log("Attacking Left to Right.");
+                //Debug.Log("Attacking Left to Right.");
             }
             else
             {
@@ -96,7 +94,7 @@ public class MeleeWeapon : Weapon
 
                 weaponToSwing.transform.localRotation = Quaternion.Euler(weaponToSwing.transform.localRotation.x, result, weaponToSwing.transform.localRotation.z);
 
-                Debug.Log("Attacking Right to Left.");
+                //Debug.Log("Attacking Right to Left.");
             }
         }
 	}
@@ -107,7 +105,7 @@ public class MeleeWeapon : Weapon
 
         if (canAttack)
         {
-            Debug.Log("Attacking with Melee.");
+            //Debug.Log("Attacking with Melee.");
 
             ExecuteAttack();
 
@@ -118,7 +116,6 @@ public class MeleeWeapon : Weapon
             StartCoroutine("WaitForTriggerToPopulate");
 
             //weaponRenderer.enabled = true;
-            
         }
     }
 
@@ -129,7 +126,7 @@ public class MeleeWeapon : Weapon
             yield return null;
         }
 
-        Debug.Log("Disabling");
+        //Debug.Log("Disabling");
 
         ourCone.enabled = false;
     }
@@ -164,24 +161,25 @@ public class MeleeWeapon : Weapon
     // These are called when our cone receives a collision
     public void ProcessCollision(Collision other)
     {
+        Debug.Log("Processing collision with: " + other.gameObject.tag);
         if (base.belongsToPlayer && other.gameObject.CompareTag("Enemy"))
         {
             //other.gameObject.GetComponent<EnemyController>().ApplyDamage(damage);
         }
         else if (!base.belongsToPlayer && other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<PlayerController>().ApplyDamage(damage);
+            //other.gameObject.GetComponent<PlayerController>().ApplyDamage(damage);
         }
     }
 
     // These are called when our cone receives a trigger
     public void ProcessTrigger(Collider other)
     {
-        Debug.Log("Entered Trigger");
+        Debug.Log("Processing collision with: " + other.tag);
 
         if (base.belongsToPlayer && other.CompareTag("Enemy"))
         {
-            //other.GetComponent<EnemyController>().ApplyDamage(damage);
+            other.GetComponent<EnemyController>().ApplyDamage(damage);
         }
         else if (!base.belongsToPlayer && other.CompareTag("Player"))
         {

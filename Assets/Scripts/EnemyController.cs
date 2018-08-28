@@ -7,7 +7,7 @@ public class EnemyController : MonoBehaviour
 {
     public float health = 10;
     private bool engaging = false;
-
+    public float maxDistanceToUnfollow = 40;
     private GameObject engagedPlayer;
 
     private List<GameObject> engagedPlayers;
@@ -48,9 +48,9 @@ public class EnemyController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            engagedPlayers.Remove(other.gameObject);
+            //engagedPlayers.Remove(other.gameObject);
 
-            if (engagedPlayers.Count == 0) engaging = false;
+            //if (engagedPlayers.Count == 0) engaging = false;
         }
     }
 
@@ -58,19 +58,24 @@ public class EnemyController : MonoBehaviour
     {
         engagedPlayer = FindClosestPlayer();
 
-        // Rotate Towards our engaged player
-        transform.LookAt(engagedPlayer.transform);
+        if (engagedPlayer != null)
+        {
+            // Rotate Towards our engaged player
+            transform.LookAt(engagedPlayer.transform);
 
-        distance = Vector3.Distance(transform.position, engagedPlayer.transform.position);
-        
-        // Determine whether we attack or move forward
-        if (distance <= ourWeapon.attackDistance)
-        {
-            ourWeapon.DelayedAttack();
-        }
-        else if (ourWeapon.charged)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, engagedPlayer.transform.position, maxDistanceDelta);
+            distance = Vector3.Distance(transform.position, engagedPlayer.transform.position);
+
+            // Determine whether we attack or move forward
+            if (distance <= ourWeapon.attackDistance)
+            {
+                ourWeapon.DelayedAttack();
+            }
+            else if (!ourWeapon.charging)
+            {
+                ourWeapon.Moved();
+
+                transform.position = Vector3.MoveTowards(transform.position, engagedPlayer.transform.position, maxDistanceDelta);
+            }
         }
     }
 
@@ -80,26 +85,54 @@ public class EnemyController : MonoBehaviour
         int index = 0;
         float minDistance = 0;
 
+        List<int> toRemove = new List<int>();
+
         for (int i = 0; i < engagedPlayers.Count; i++)
         {
+            // Is the player dead?
+            if (engagedPlayers[i].GetComponent<PlayerController>().health <= 0)
+            {
+                toRemove.Add(i);
+                continue;
+            }
+
+            float temp = Vector3.Distance(transform.position, engagedPlayers[i].transform.position);
+
+            if (temp > maxDistanceToUnfollow)
+            {
+                if (!toRemove.Contains(i)) toRemove.Add(i);
+            }
+
             if (i == 0)
             {
-                minDistance = Vector3.Distance(transform.position, engagedPlayers[i].transform.position);
+                minDistance = temp;
 
                 continue;
             }
             else
             {
-                distance = Vector3.Distance(transform.position, engagedPlayers[i].transform.position);
-
                 if (distance < minDistance)
                 {
+                    minDistance = distance;
                     index = i;
                 }
             }
         }
 
-        return engagedPlayers[index];
+        if (toRemove.Count > 0)
+        {
+            foreach(int i in toRemove)
+            {
+                engagedPlayers.RemoveAt(i);
+            }
+        }
+
+        if (engagedPlayers.Count > 0) return engagedPlayers[index];
+        else
+        {
+            engaging = false;
+            return null;
+        }
     }
 
     public void ApplyDamage(float damage)

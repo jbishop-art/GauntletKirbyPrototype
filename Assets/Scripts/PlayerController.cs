@@ -213,6 +213,15 @@ public class PlayerController : MonoBehaviour
 
     public void Kill()
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
+
+        Debug.Log("WE DIED.");
+
+        Renderer[] renders = GetComponentsInChildren<Renderer>();
+
+        foreach(Renderer r in renders)
+        {
+            r.enabled = false;
+        }
     }
 }

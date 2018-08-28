@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,8 +24,8 @@ public class Projectile : MonoBehaviour
         // Ignore collision between bullets and other bullets
         Physics.IgnoreLayerCollision(11, 11);
 
-        if (shotByPlayer) Physics.IgnoreLayerCollision(11, 9);
-        else Physics.IgnoreLayerCollision(11, 10);
+        //if (shotByPlayer) Physics.IgnoreLayerCollision(11, 9);
+        //else Physics.IgnoreLayerCollision(11, 10);
 	}
 	
 	// Update is called once per frame
@@ -48,22 +49,20 @@ public class Projectile : MonoBehaviour
         GetComponent<Rigidbody>().AddForce(transform.forward * speed * 500);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void SetIgnore(bool belongsToPlayer)
     {
-        // If both objects are a projectile, ignore it and don't process
-        if (collision.gameObject.GetComponent<Projectile>() != null)
-        {
-            Physics.IgnoreCollision(this.GetComponent<Collider>(), collision.collider, true);
+        shotByPlayer = belongsToPlayer;
+        //if (belongsToPlayer) Physics.IgnoreLayerCollision(11, 9);
+        //else Physics.IgnoreLayerCollision(11, 10);
+    }
 
-            return;
-        }
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == 11) Physics.IgnoreCollision(GetComponent<Collider>(), collision.collider);
+        if (shotByPlayer && collision.gameObject.layer == 9) Physics.IgnoreCollision(GetComponent<Collider>(), collision.collider);
+        else if (shotByPlayer && collision.gameObject.layer == 10) Physics.IgnoreCollision(GetComponent<Collider>(), collision.collider);
 
-        if (collision.gameObject.GetComponent<Projectile>() != null)
-        {
-            Physics.IgnoreCollision(this.GetComponent<Collider>(), collision.collider, true);
-
-            return;
-        }
+        //Debug.Log("Processing Projectile Collision with: " + collision.gameObject.tag);
 
         if (collision.gameObject.CompareTag("Player") && !shotByPlayer)
         {
