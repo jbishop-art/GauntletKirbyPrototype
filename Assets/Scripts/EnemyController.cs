@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public GameObject ability;
+
     public float health = 10;
-<<<<<<< HEAD
+
     private bool engaging = false;
     public float maxDistanceToUnfollow = 40;
     private GameObject engagedPlayer;
@@ -18,38 +20,25 @@ public class EnemyController : MonoBehaviour
     public float moveSpeed = 10;
     private float distance;
 
-    // Use this for initialization
-    void Start ()
-    {
-        engagedPlayers = new List<GameObject>();
-
-        maxDistanceDelta = moveSpeed / 50;
-        //Physics.IgnoreLayerCollision(10, 10);	
-	}
-=======
-    public GameObject ability;
-    
-
-
 	// Use this for initialization
 	void Start ()
     {
         GameObject spawnedAbility = Instantiate(ability, transform.position, Quaternion.identity);
 
-        spawnedAbility.transform.parent = gameObject.transform; 
+        spawnedAbility.transform.parent = gameObject.transform;
+
+
+        engagedPlayers = new List<GameObject>();
+
+        maxDistanceDelta = moveSpeed / 50;
+        //Physics.IgnoreLayerCollision(10, 10);	
     }
->>>>>>> Jonathan
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update ()
     {
-<<<<<<< HEAD
         if (engaging) Engage();
 	}
-=======
-        
-    }
->>>>>>> Jonathan
 
     public void OnTriggerEnter(Collider other)
     {
