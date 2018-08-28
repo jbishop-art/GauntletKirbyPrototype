@@ -5,16 +5,23 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public float health = 10;
+    public GameObject ability;
+    
+
 
 	// Use this for initialization
-	void Start () {
-		
-	}
+	void Start ()
+    {
+        GameObject spawnedAbility = Instantiate(ability, transform.position, Quaternion.identity);
+
+        spawnedAbility.transform.parent = gameObject.transform; 
+    }
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+	void Update ()
+    {
+        
+    }
 
     public void ApplyDamage(float damage)
     {
@@ -27,4 +34,5 @@ public class EnemyController : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
 }

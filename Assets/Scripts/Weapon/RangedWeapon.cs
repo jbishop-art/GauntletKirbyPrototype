@@ -30,7 +30,7 @@ public class RangedWeapon : Weapon
 
         if (canAttack)
         {
-            Debug.Log("Attacking with RANGED.");
+            //Debug.Log("Attacking with RANGED.");
 
             Shoot();
 

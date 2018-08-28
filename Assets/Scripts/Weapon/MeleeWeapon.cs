@@ -89,7 +89,7 @@ public class MeleeWeapon : Weapon
 
                 weaponToSwing.transform.localRotation = Quaternion.Euler(weaponToSwing.transform.localRotation.x, result, weaponToSwing.transform.localRotation.z);
 
-                Debug.Log("Attacking Left to Right.");
+                //Debug.Log("Attacking Left to Right.");
             }
             else
             {
@@ -97,7 +97,7 @@ public class MeleeWeapon : Weapon
 
                 weaponToSwing.transform.localRotation = Quaternion.Euler(weaponToSwing.transform.localRotation.x, result, weaponToSwing.transform.localRotation.z);
 
-                Debug.Log("Attacking Right to Left.");
+                //Debug.Log("Attacking Right to Left.");
             }
         }
 	}
@@ -108,7 +108,7 @@ public class MeleeWeapon : Weapon
 
         if (canAttack)
         {
-            Debug.Log("Attacking with Melee.");
+            //Debug.Log("Attacking with Melee.");
 
             ExecuteAttack();
 
@@ -130,7 +130,7 @@ public class MeleeWeapon : Weapon
             yield return null;
         }
 
-        Debug.Log("Disabling");
+        //Debug.Log("Disabling");
 
         ourCone.enabled = false;
     }
