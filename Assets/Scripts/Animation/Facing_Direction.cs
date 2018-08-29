@@ -44,13 +44,13 @@ public class Facing_Direction : MonoBehaviour {
             switchAnimation("leftMoveTrigger");
             //Debug.Log("it works");
             //leftMove();
-        } else if (Input.GetKey("g"))
+        } else if (Input.GetKey("t"))
         {
             turnAround();
         } else if (Input.GetKey("h"))
         {
             rightMove();
-        } else if (Input.GetKey("t"))
+        } else if (Input.GetKey("g"))
         {
             moveForward();
         } else
