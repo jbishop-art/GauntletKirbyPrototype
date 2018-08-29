@@ -63,7 +63,7 @@ public class Weapon : MonoBehaviour
         // Here for now.. This will live inside the PlayerController script and will be called when the appropriate button is pressed.  When in the PlayerController script, this will be ourWeapon.Attack();  Not just Attack();
         if (Input.GetKey(KeyCode.Mouse0)) // If we change to GetKeyDown, we have to click each time to attack.  If not, we can just attack by holding down the mousebutton
         {
-            Attack();
+            //Attack();
         }
     }
 

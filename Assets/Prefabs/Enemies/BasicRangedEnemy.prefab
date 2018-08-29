@@ -89,7 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4109936552137840}
   - component: {fileID: 114262046201267260}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: BasicRangedWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 33654473852075308}
   - component: {fileID: 23713243830081770}
   - component: {fileID: 65317162102632004}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Hat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -331,12 +331,12 @@ Rigidbody:
   m_GameObject: {fileID: 1770621314593230}
   serializedVersion: 2
   m_Mass: 100
-  m_Drag: 0
+  m_Drag: 3
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &65098732000901284
 BoxCollider:
@@ -409,8 +409,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e1d2da88c953c54e9dc6ed0172319e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ability: {fileID: 1155721177092418, guid: ee089742ebe5a5f42bcaa8a23cc01a9f, type: 2}
   health: 10
+  engaging: 0
   maxDistanceToUnfollow: 40
+  engagedPlayer: {fileID: 0}
+  engagedPlayers: []
   ourWeapon: {fileID: 114262046201267260}
   moveSpeed: 10
 --- !u!135 &135117042475102258

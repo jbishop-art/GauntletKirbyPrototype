@@ -38,6 +38,7 @@ public class MeleeWeapon : Weapon
         if (ourCone.GetComponent<ColliderListener>() == null) ourCone.gameObject.AddComponent<ColliderListener>();
 
         ColliderListener listener = ourCone.GetComponent<ColliderListener>();
+        listener.isWeapon = true;
         listener.ourWeapon = this;
     }
 
@@ -159,9 +160,11 @@ public class MeleeWeapon : Weapon
     }
 
     // These are called when our cone receives a collision
-    public void ProcessCollision(Collision other)
+    public  void ProcessCollision(Collision other)
     {
-        Debug.Log("Processing collision with: " + other.gameObject.tag);
+        //base.ProcessCollision(other);
+        //Debug.Log("Processing collision with: " + other.gameObject.tag);
+
         if (base.belongsToPlayer && other.gameObject.CompareTag("Enemy"))
         {
             //other.gameObject.GetComponent<EnemyController>().ApplyDamage(damage);
@@ -173,9 +176,10 @@ public class MeleeWeapon : Weapon
     }
 
     // These are called when our cone receives a trigger
-    public void ProcessTrigger(Collider other)
+    public  void ProcessTrigger(Collider other)
     {
-        Debug.Log("Processing collision with: " + other.tag);
+        //base.ProcessTrigger(other);
+        //Debug.Log("Processing collision with: " + other.tag);
 
         if (base.belongsToPlayer && other.CompareTag("Enemy"))
         {

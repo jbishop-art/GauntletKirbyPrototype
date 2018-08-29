@@ -56,11 +56,20 @@ public class Projectile : MonoBehaviour
         //else Physics.IgnoreLayerCollision(11, 10);
     }
 
-    public void OnCollisionEnter(Collision collision)
+    public void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.layer == 11) Physics.IgnoreCollision(GetComponent<Collider>(), collision.collider);
-        if (shotByPlayer && collision.gameObject.layer == 9) Physics.IgnoreCollision(GetComponent<Collider>(), collision.collider);
-        else if (shotByPlayer && collision.gameObject.layer == 10) Physics.IgnoreCollision(GetComponent<Collider>(), collision.collider);
+        if (collision.gameObject.layer == 11) Physics.IgnoreCollision(GetComponent<Collider>(), collision);
+
+        if (shotByPlayer && collision.gameObject.layer == 9)
+        {
+            Physics.IgnoreCollision(GetComponent<Collider>(), collision);
+            return;
+        }
+        else if (!shotByPlayer && collision.gameObject.layer == 10)
+        {
+            Physics.IgnoreCollision(GetComponent<Collider>(), collision);
+            return;
+        }
 
         //Debug.Log("Processing Projectile Collision with: " + collision.gameObject.tag);
 
@@ -69,18 +78,18 @@ public class Projectile : MonoBehaviour
             Debug.Log("Hit Player");
             collision.gameObject.GetComponent<PlayerController>().ApplyDamage(damage);
 
-            //Kill();
+            Kill();
         }
         else if (collision.gameObject.CompareTag("Enemy") && shotByPlayer)
         {
             Debug.Log("Hit Enemy");
             collision.gameObject.gameObject.GetComponent<EnemyController>().ApplyDamage(damage);
 
-            //Kill();
+            Kill();
         }
 
         // For now, no matter what the bullet hits, it gets destroyed
-        if (hasFired) Kill();
+        //if (hasFired) Kill();
     }
 
     public void Kill()

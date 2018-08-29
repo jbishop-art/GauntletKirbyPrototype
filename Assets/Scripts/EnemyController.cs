@@ -9,11 +9,11 @@ public class EnemyController : MonoBehaviour
 
     public float health = 10;
 
-    private bool engaging = false;
+    public bool engaging = false;
     public float maxDistanceToUnfollow = 40;
-    private GameObject engagedPlayer;
+    public GameObject engagedPlayer;
 
-    private List<GameObject> engagedPlayers;
+    public List<GameObject> engagedPlayers;
 
     public Weapon ourWeapon;
     private float maxDistanceDelta;
@@ -27,6 +27,10 @@ public class EnemyController : MonoBehaviour
 
         spawnedAbility.transform.parent = gameObject.transform;
 
+        spawnedAbility.GetComponent<Weapon>().belongsToPlayer = false;
+        spawnedAbility.GetComponent<Weapon>().charging = false;
+
+        ability = spawnedAbility;
 
         engagedPlayers = new List<GameObject>();
 
@@ -42,9 +46,9 @@ public class EnemyController : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.GetComponent<PlayerController>())
         {
-            //engagedPlayer = other.gameObject;
+            engagedPlayer = other.gameObject;
 
             if (!engagedPlayers.Contains(other.gameObject)) engagedPlayers.Add(other.gameObject);
 
@@ -56,18 +60,26 @@ public class EnemyController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //engagedPlayers.Remove(other.gameObject);
+            engagedPlayers.Remove(other.gameObject);
 
-            //if (engagedPlayers.Count == 0) engaging = false;
+            if (engagedPlayers.Count == 0) engaging = false;
         }
     }
 
     public void Engage()
     {
-        engagedPlayer = FindClosestPlayer();
+        // Not using right now.  If players are close the enemy will flip.
+        //engagedPlayer = FindClosestPlayer();
 
         if (engagedPlayer != null)
         {
+            //AttemptAbilityAttack();
+            //AttemptRegularAttack();
+
+            //bool canAttack = AttemptAbilityAttack();
+            //if (canAttack == false) AttemptRegularAttack();
+
+
             // Rotate Towards our engaged player
             transform.LookAt(engagedPlayer.transform);
 
@@ -84,23 +96,130 @@ public class EnemyController : MonoBehaviour
 
                 transform.position = Vector3.MoveTowards(transform.position, engagedPlayer.transform.position, maxDistanceDelta);
             }
+
+            /*
+            bool useWeapon = true;
+            Weapon abilityScript = ability.GetComponent<Weapon>();
+
+            //if (ability.GetComponent<Weapon>().canAttack) useWeapon = false;
+            if (lastAttackBasic && abilityScript.canAttack)
+            {
+                AbilityAttack();
+            }
+            else if (!lastAttackBasic && ourWeapon.canAttack)
+            {
+                BasicAttack();
+            }
+            else if (abilityScript.canAttack)
+            {
+                AbilityAttack();
+            }
+            else
+            {
+                BasicAttack();
+            }
+
+            if (abilityScript.canAttack && ourWeapon.canAttack)
+
+            
+            if (!useWeapon)
+            {
+                if (distance <= ability.GetComponent<Weapon>().attackDistance)
+                {
+                    ability.GetComponent<Weapon>().DelayedAttack();
+                }
+                else if (!ability.GetComponent<Weapon>().charging)
+                {
+                    ability.GetComponent<Weapon>().Moved();
+
+                    transform.position = Vector3.MoveTowards(transform.position, engagedPlayer.transform.position, maxDistanceDelta);
+                }
+            }
+            else
+            {
+                // Determine whether we attack or move forward
+                if (distance <= ourWeapon.attackDistance)
+                {
+                    ourWeapon.DelayedAttack();
+                }
+                else if (!ourWeapon.charging)
+                {
+                    ourWeapon.Moved();
+
+                    transform.position = Vector3.MoveTowards(transform.position, engagedPlayer.transform.position, maxDistanceDelta);
+                }
+            }
+            */
         }
     }
+
+    private void AbilityAttack()
+    {
+        throw new NotImplementedException();
+    }
+
+    private bool AttemptRegularAttack()
+    {
+        // Rotate Towards our engaged player
+        transform.LookAt(engagedPlayer.transform);
+
+        distance = Vector3.Distance(transform.position, engagedPlayer.transform.position);
+
+        // Determine whether we attack or move forward
+        if (distance <= ourWeapon.attackDistance)
+        {
+            ourWeapon.DelayedAttack();
+        }
+        else if (!ourWeapon.charging)
+        {
+            ourWeapon.Moved();
+
+            transform.position = Vector3.MoveTowards(transform.position, engagedPlayer.transform.position, maxDistanceDelta);
+        }
+
+        return ourWeapon.canAttack;
+    }
+
+    private bool AttemptAbilityAttack()
+    {
+        Weapon abilityWeaponScript = ability.GetComponent<Weapon>();
+        // Rotate Towards our engaged player
+        transform.LookAt(engagedPlayer.transform);
+
+        distance = Vector3.Distance(transform.position, engagedPlayer.transform.position);
+
+        // Determine whether we attack or move forward
+        if (distance <= ourWeapon.attackDistance)
+        {
+            abilityWeaponScript.DelayedAttack();
+        }
+        else if (!abilityWeaponScript.charging)
+        {
+            abilityWeaponScript.Moved();
+
+            transform.position = Vector3.MoveTowards(transform.position, engagedPlayer.transform.position, maxDistanceDelta);
+        }
+
+        return abilityWeaponScript.canAttack;
+    }
+
 
     // Determine which player is closest to us
     private GameObject FindClosestPlayer()
     {
-        int index = 0;
+        GameObject index = null;
         float minDistance = 0;
 
-        List<int> toRemove = new List<int>();
+        List<GameObject> toRemove = new List<GameObject>();
 
+        if (engagedPlayers.Count == 0) return null;
+        
         for (int i = 0; i < engagedPlayers.Count; i++)
         {
             // Is the player dead?
             if (engagedPlayers[i].GetComponent<PlayerController>().health <= 0)
             {
-                toRemove.Add(i);
+                toRemove.Add(engagedPlayers[i]);
                 continue;
             }
 
@@ -108,12 +227,13 @@ public class EnemyController : MonoBehaviour
 
             if (temp > maxDistanceToUnfollow)
             {
-                if (!toRemove.Contains(i)) toRemove.Add(i);
+                if (!toRemove.Contains(engagedPlayers[i])) toRemove.Add(engagedPlayers[i]);
             }
 
             if (i == 0)
             {
                 minDistance = temp;
+                index = engagedPlayers[i];
 
                 continue;
             }
@@ -122,20 +242,20 @@ public class EnemyController : MonoBehaviour
                 if (distance < minDistance)
                 {
                     minDistance = distance;
-                    index = i;
+                    index = engagedPlayers[i];
                 }
             }
         }
 
         if (toRemove.Count > 0)
         {
-            foreach(int i in toRemove)
+            foreach(GameObject i in toRemove)
             {
-                engagedPlayers.RemoveAt(i);
+                engagedPlayers.Remove(i);
             }
         }
 
-        if (engagedPlayers.Count > 0) return engagedPlayers[index];
+        if (engagedPlayers.Count > 0) return index;
         else
         {
             engaging = false;

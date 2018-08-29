@@ -178,9 +178,12 @@ public class PlayerController : MonoBehaviour
 
     void UseAbility()
     {
-        if (Input.GetAxisRaw(abilityBtn) > 0.1f)
+        if (Input.GetKey(KeyCode.Space) && ability != null)
+        //if (Input.GetAxisRaw(abilityBtn) > 0.1f)
         {
             Debug.Log("USE Ability!");
+
+            ability.GetComponent<Weapon>().Attack();
         }
     }
 
@@ -190,6 +193,8 @@ public class PlayerController : MonoBehaviour
         if ((Input.GetButtonDown(stealAbilityBtn) == true) && (col == true))
         {
             ability = Instantiate(colAbility, transform.position, Quaternion.identity);
+            ability.GetComponent<Weapon>().belongsToPlayer = true;
+            ability.GetComponent<Weapon>().charging = false;
             ability.transform.parent = gameObject.transform;
         }
         
