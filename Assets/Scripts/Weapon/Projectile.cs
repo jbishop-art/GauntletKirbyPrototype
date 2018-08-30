@@ -5,39 +5,42 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-
     public float damage = 5;
 
     public float speed;
 
     public float lifetime;
+
+    public float maxHitCount = 2;
+    public float currentHitCount = 0;
+
     private float currentLifetime = 0;
 
     private bool hasFired = false;
 
-    [HideInInspector]public bool shotByPlayer = false;
-    [HideInInspector]public Renderer theRenderer;
+    [HideInInspector] public bool shotByPlayer = false;
+    [HideInInspector] public Renderer theRenderer;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         // Ignore collision between bullets and other bullets
         Physics.IgnoreLayerCollision(11, 11);
 
         //if (shotByPlayer) Physics.IgnoreLayerCollision(11, 9);
         //else Physics.IgnoreLayerCollision(11, 10);
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    }
+
+    // Update is called once per frame
+    void Update()
     {
-		if (hasFired)
+        if (hasFired)
         {
             currentLifetime += Time.deltaTime;
 
             if (currentLifetime > lifetime) Kill();
         }
-	}
+    }
 
     public void Fire(float theDamage)
     {
@@ -78,14 +81,26 @@ public class Projectile : MonoBehaviour
             Debug.Log("Hit Player");
             collision.gameObject.GetComponent<PlayerController>().ApplyDamage(damage);
 
-            Kill();
+            currentHitCount++;
+
+            if (currentHitCount == maxHitCount) Kill();
         }
         else if (collision.gameObject.CompareTag("Enemy") && shotByPlayer)
         {
             Debug.Log("Hit Enemy");
             collision.gameObject.gameObject.GetComponent<EnemyController>().ApplyDamage(damage);
 
-            Kill();
+            currentHitCount++;
+
+            if (currentHitCount == maxHitCount) Kill();
+        }
+        else if (collision.gameObject.layer == 12)
+        {
+            Debug.Log("Hit Environment");
+
+            currentHitCount++;
+
+            if (currentHitCount == maxHitCount) Kill();
         }
 
         // For now, no matter what the bullet hits, it gets destroyed
