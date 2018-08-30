@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/AI.unity
+=======
+- path: Assets/Scenes/rikkiScene.unity
+>>>>>>> rikki
   isLoaded: 1
   isActive: 1
