@@ -128,6 +128,8 @@ MonoBehaviour:
   damage: 1
   speed: 4
   lifetime: 2
+  maxHitCount: 1
+  currentHitCount: 0
   shotByPlayer: 1
   theRenderer: {fileID: 0}
 --- !u!135 &135389000752798244

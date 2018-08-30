@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\Weapon\ColliderListener.cs" />
     <Compile Include="Assets\Scripts\Weapon\DashAbility.cs" />
     <Compile Include="Assets\Scripts\Weapon\MeleeWeapon.cs" />
+    <Compile Include="Assets\Scripts\Weapon\PiercingAbility.cs" />
     <Compile Include="Assets\Scripts\Weapon\Projectile.cs" />
     <Compile Include="Assets\Scripts\Weapon\RangedWeapon.cs" />
     <Compile Include="Assets\Scripts\Weapon\Weapon.cs" />
