@@ -34,16 +34,33 @@ public class PlayerController : MonoBehaviour
     public Weapon theWeapon;
     public GameObject ability;
     GameObject colAbility;
-     
+    int abilityCount;
+    public int abilityTime;
+
+    float intHP;
+    float curHP;
+    public int regenAmount;
+    public float regenRate;
+    bool regenActive = false;
+    bool decayActive = false;
+    GameObject childTarget;
+
+    GameObject collidedObject;
+    int count;
+
 
 
     // Use this for initialization
     void Start()
     {
+        
+        intHP = health;
+                
         string playerN  = "P" + playerNum;
         attackBtn = playerN + " Attack Button";
         abilityBtn = playerN + " Use Ability";
         stealAbilityBtn = playerN + " Steal Ability";
+
         
 
         //Establishes forward direction of the camera to have consistant movment based on the character.  Because the camera is at a downward angle and we want the camera to be fixed at this angle and perspective, we need to always have transforms adjust to keep this same angle.
@@ -63,6 +80,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        curHP = health;
+
+        RegenHP();
+
         //Determines distance between Player01 & Player02.
         distance = Vector3.Distance(player01T.position, player02T.position);
 
@@ -166,6 +187,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //Attack.
     void Attack()
     {
         if (Input.GetAxisRaw(attackBtn) < -0.1f)
@@ -175,7 +197,7 @@ public class PlayerController : MonoBehaviour
         
     }
 
-
+    //Use currently equiped ability.
     void UseAbility()
     {
         if (Input.GetAxisRaw(abilityBtn) > 0.1f)
@@ -184,17 +206,100 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
+    //Steal ability from player or npc.
     void StealAbility()
     {
-        if ((Input.GetButtonDown(stealAbilityBtn) == true) && (col == true))
+        if (abilityCount < 1)
         {
-            ability = Instantiate(colAbility, transform.position, Quaternion.identity);
-            ability.transform.parent = gameObject.transform;
+            if ((Input.GetButtonDown(stealAbilityBtn) == true) && (col == true))
+            {
+                count = abilityTime;
+                abilityCount += 1;
+                ability = Instantiate(colAbility, transform.position, Quaternion.identity);
+                ability.transform.parent = gameObject.transform;
+                AbilityDecay();
+                if (collidedObject.tag == "Player")
+                {
+                    collidedObject.SendMessage("DestroyAbility");      
+                    //collidedObject.GetComponent<PlayerController>().DestroyAbility();
+                }
+                
+            }
         }
-        
     }
 
+    //Starts actions to destroy the ability after a set amount of time.
+    void AbilityDecay()
+    {
+        if (decayActive == false)
+        {
+            StartCoroutine(DecayWait());
+        }
+    }
+
+    //Timing code to destroy ability after a set amount of time.
+    IEnumerator DecayWait()
+    {
+        decayActive = true;
+        count = abilityTime;
+
+        for (int i = abilityTime; i > 0; i--)
+        {
+            Debug.Log(count);
+            count -= 1;
+            yield return new WaitForSeconds(1);
+        }
+
+        if (count == 0)
+        {
+            if (playerNum == 1)
+            {
+                childTarget = GameObject.FindWithTag("Ability");
+                //childTarget = player01T.transform.Find("P_Ability01(Clone)").gameObject;
+                Destroy(childTarget);
+                //childTarget = player01T.transform.Find("P_Ability02(Clone)").gameObject;
+                //Destroy(childTarget);
+                abilityCount = 0;
+            }
+            else if (playerNum == 2)
+            {
+                childTarget = GameObject.FindWithTag("Ability");
+                //childTarget = player02T.transform.Find("P_Ability01(Clone)").gameObject;
+                Destroy(childTarget);
+                //childTarget = player02T.transform.Find("P_Ability02(Clone)").gameObject;
+                //Destroy(childTarget);
+                abilityCount = 0;
+            }
+            
+        }
+
+        decayActive = false;
+    }
+
+    //Destorys currently equipped ability.
+    void DestroyAbility()
+    {
+        if (playerNum == 1)
+        {
+            childTarget = GameObject.FindWithTag("Ability");
+            //childTarget = player01T.transform.Find("P_Ability01(Clone)").gameObject;
+            Destroy(childTarget);
+            //childTarget = player01T.transform.Find("P_Ability02(Clone)").gameObject;
+            //Destroy(childTarget);
+            abilityCount = 0;
+        }
+        else if (playerNum == 2)
+        {
+            childTarget = GameObject.FindWithTag("Ability");
+            //childTarget = player02T.transform.Find("P_Ability01(Clone)").gameObject;
+            Destroy(childTarget);
+            //childTarget = player02T.transform.Find("P_Ability02(Clone)").gameObject;
+            //Destroy(childTarget);
+            abilityCount = 0;
+        }
+    }
+
+    //Damages the player.
     public void ApplyDamage(float damage)
     {
         health = health - damage;
@@ -202,22 +307,68 @@ public class PlayerController : MonoBehaviour
         if (health <= 0) Kill();
     }
 
+    //Kills player.
     public void Kill()
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
+
+        Debug.Log("WE DIED.");
+
+        Renderer[] renders = GetComponentsInChildren<Renderer>();
+
+        foreach(Renderer r in renders)
+        {
+            r.enabled = false;
+        }
     }
 
+    //Detect collision.
     private void OnCollisionEnter(Collision collision)
     {
+        //Detect and store name of gameobject which is colliding with gameObject.
+        collidedObject = collision.gameObject;
+
+        //Detects ability that the object you are colliding with has and stores that value.
          if (collision.gameObject.tag == "Enemy")
         {
             col = true;
             colAbility = collision.gameObject.GetComponent<EnemyController>().ability;
             Debug.Log(colAbility);
         }
+        else if (collision.gameObject.tag == "Player")
+        {
+            col = true;
+            colAbility = collision.gameObject.GetComponent<PlayerController>().ability;
+            Debug.Log(colAbility);
+        }
         else
         {
             col = false;
         }
+    }
+
+    
+    //Regen HP for player over time.
+    void RegenHP()
+    {
+        if (regenActive == false)
+        {
+            StartCoroutine(RegenWait());
+        }
+                
+        
+    }
+
+    //Timer to limit how fast the player regens HP.
+    IEnumerator RegenWait()
+    {
+        regenActive = true;
+        if (curHP < intHP)
+        {
+            health += regenAmount;
+        }
+        yield return new WaitForSeconds(regenRate);
+        regenActive = false;
+
     }
 }

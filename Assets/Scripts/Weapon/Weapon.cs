@@ -15,6 +15,16 @@ public class Weapon : MonoBehaviour
 
     public bool canAttack = true;
 
+    //For AI
+    [Header("AI Attributes")]
+    public float attackDistance; // For AI this is how close they need to be to attack with their given weapon/ability
+
+    public float chargeTime; // Upon initiating an attack, how long before the attack actually executes.  AI only.
+    public float currentChargeTime;
+    public bool charging = false; // True if we are charging an attack.  This prevents the enemy from moving while attempting to attack.
+    public bool charged = false;
+    public bool hasMoved = false;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -24,6 +34,21 @@ public class Weapon : MonoBehaviour
 	// Update is called once per frame
 	public virtual void Update ()
     {
+        if (charging)
+        {
+            currentChargeTime += Time.deltaTime;
+
+            if (currentChargeTime > chargeTime)
+            {
+                currentChargeTime = 0;
+                charged = true;
+                charging = false;
+
+                Attack();
+            }
+        }
+        
+
         if (canAttack == false)
         {
             currentCooldown += Time.deltaTime;
@@ -45,5 +70,26 @@ public class Weapon : MonoBehaviour
     public virtual void Attack()
     {
 
+    }
+
+    // AI Methods
+    public void Moved()
+    {
+        hasMoved = true;
+        charged = false;
+        charging = false;
+    }
+
+    public void DelayedAttack()
+    {
+        if (canAttack && charged && !hasMoved)
+        {
+            Attack();
+        }
+        else if (canAttack)
+        {
+            charging = true;
+            hasMoved = false;
+        }
     }
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class MeleeWeapon : Weapon
 {
+    [Header("Melee Attributes")]
+
     ColliderListener listener;
 
     // These two will probably be replaced.  Our actual game will use sprites and not an actual 3d mesh.
@@ -36,7 +38,6 @@ public class MeleeWeapon : Weapon
         if (ourCone.GetComponent<ColliderListener>() == null) ourCone.gameObject.AddComponent<ColliderListener>();
 
         ColliderListener listener = ourCone.GetComponent<ColliderListener>();
-
         listener.ourWeapon = this;
     }
 
@@ -79,10 +80,6 @@ public class MeleeWeapon : Weapon
 
         if (canAttack == false)
         {
-            // These two lines are messy and should be changed later
-            //if (currentCooldown > (cooldown * 0.01f)) ourCone.enabled = false;
-            //if (currentCooldown > swingSpeed) weaponRenderer.enabled = false;
-
             if (attackRightToLeft)
             {
                 float result = Mathf.Lerp(min, max, currentCooldown / swingSpeed);
@@ -119,7 +116,6 @@ public class MeleeWeapon : Weapon
             StartCoroutine("WaitForTriggerToPopulate");
 
             //weaponRenderer.enabled = true;
-            
         }
     }
 
@@ -162,21 +158,24 @@ public class MeleeWeapon : Weapon
         attackRightToLeft = false;
     }
 
+    // These are called when our cone receives a collision
     public void ProcessCollision(Collision other)
     {
+        Debug.Log("Processing collision with: " + other.gameObject.tag);
         if (base.belongsToPlayer && other.gameObject.CompareTag("Enemy"))
         {
-            other.gameObject.GetComponent<EnemyController>().ApplyDamage(damage);
+            //other.gameObject.GetComponent<EnemyController>().ApplyDamage(damage);
         }
         else if (!base.belongsToPlayer && other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<PlayerController>().ApplyDamage(damage);
+            //other.gameObject.GetComponent<PlayerController>().ApplyDamage(damage);
         }
     }
 
+    // These are called when our cone receives a trigger
     public void ProcessTrigger(Collider other)
     {
-        Debug.Log("Entered Trigger");
+        Debug.Log("Processing collision with: " + other.tag);
 
         if (base.belongsToPlayer && other.CompareTag("Enemy"))
         {

@@ -166,3 +166,7 @@ C:\EAE\Project2\GauntletKirbyPrototype\obj\Debug\Assembly-CSharp.csproj.CoreComp
 C:\EAE\Project2\GauntletKirbyPrototype\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\EAE\Project2\GauntletKirbyPrototype\obj\Debug\Assembly-CSharp.dll
 C:\EAE\Project2\GauntletKirbyPrototype\obj\Debug\Assembly-CSharp.pdb
+C:\Users\u0868833\Desktop\Project Folder\Unity\GauntletKirbyPrototype\GauntletKirbyPrototype\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+C:\Users\u0868833\Desktop\Project Folder\Unity\GauntletKirbyPrototype\GauntletKirbyPrototype\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
+C:\Users\u0868833\Desktop\Project Folder\Unity\GauntletKirbyPrototype\GauntletKirbyPrototype\obj\Debug\Assembly-CSharp.dll
+C:\Users\u0868833\Desktop\Project Folder\Unity\GauntletKirbyPrototype\GauntletKirbyPrototype\obj\Debug\Assembly-CSharp.pdb
