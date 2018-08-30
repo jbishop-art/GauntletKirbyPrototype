@@ -64,6 +64,12 @@
     <Compile Include="Assets\Scripts\Animation\Chara_FacingCamera.cs" />
     <Compile Include="Assets\Scripts\Animation\Facing_Direction.cs" />
     <Compile Include="Assets\Scripts\EnemyController.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="Assets\Scripts\Facing_Direction.cs" />
+    <Compile Include="Assets\Scripts\HealthBar.cs" />
+    <Compile Include="Assets\Scripts\HealthBarLookAt.cs" />
+>>>>>>> Jonathan
     <Compile Include="Assets\Scripts\ISOcameraMove.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\SpawnPoint_Enemy.cs" />

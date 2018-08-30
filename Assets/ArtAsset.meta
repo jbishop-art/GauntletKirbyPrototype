@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/ArtAsset.meta
 guid: 7ed6f88b52ab43243b5d9d8c05715db4
+=======
+guid: d23c78d2a937aed4bbb131821cf1257b
+>>>>>>> Jonathan:Assets/Anim.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

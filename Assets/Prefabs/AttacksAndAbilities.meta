@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Prefabs/AttacksAndAbilities.meta
 guid: 6dedd07846dbc394694692be7be27ae5
+=======
+guid: 76b8399b53ca4414eb5cd39b0ed3d6d6
+>>>>>>> Jonathan:Assets/SpriteSheets.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

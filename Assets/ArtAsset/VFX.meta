@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/ArtAsset/VFX.meta
 guid: 3d8ff43fcd77a054e81ec924bea5e23b
+=======
+guid: 6378d959599196e478fc0ce603499220
+>>>>>>> Jonathan:Assets/Geo.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

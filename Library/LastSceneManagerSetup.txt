@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/AI.unity
+=======
+- path: Assets/Scenes/LevelOne.unity
+>>>>>>> Jonathan
   isLoaded: 1
   isActive: 1
